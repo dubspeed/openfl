@@ -3,10 +3,12 @@ package openfl.utils;
 import haxe.io.Bytes;
 import openfl.net.ObjectEncoding;
 import openfl.utils.Future;
+#if js
 #if haxe4
 import js.lib.ArrayBuffer;
 #else
 import js.html.ArrayBuffer;
+#end
 #end
 
 @:jsRequire("openfl/utils/ByteArray", "default")
@@ -186,8 +188,10 @@ extern class ByteArray implements IDataOutput implements IDataInput /*implements
 	public function deflate():Void;
 
 	public static function fromBytes(bytes:Bytes):ByteArray;
+	#if js
 	public static function fromArrayBuffer(buffer:ArrayBuffer):ByteArray;
-
+	#end
+	
 	/**
 	 * Decompresses the byte array using the deflate compression algorithm. The
 	 * byte array must have been compressed using the same algorithm.
